@@ -92,13 +92,13 @@ const ApiCall = () => {
             )}
           />
         </View>
-        <View>
-          {dataLoaded ? (
-            <View style={styles.footerCard1}></View>
-          ) : (
-            <View style={styles.footerCard}></View>
-          )}
-        </View>
+      </View>
+      <View>
+        {dataLoaded ? (
+          <View style={styles.footerCard1}></View>
+        ) : (
+          <View style={styles.footerCard}></View>
+        )}
       </View>
     </View>
   );
@@ -106,9 +106,13 @@ const ApiCall = () => {
 
 const styles = StyleSheet.create({
   header: {
-    paddingVertical: 10,
+    paddingVertical: 15,
     alignItems: 'center',
     backgroundColor: '#2E4C6D',
+    // position: 'absolute',
+    // left: 0,
+    // right: 0,
+    // top: 0,
   },
   titleheader: {
     alignItems: 'center',
@@ -119,8 +123,9 @@ const styles = StyleSheet.create({
     color: '#DADDFC',
   },
   searchContainer: {
-    flexDirection: 'row',
+    width: '100%',
     marginTop: 20,
+    alignItems: 'center',
   },
   input: {
     color: '#DADDFC',
@@ -132,18 +137,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   body: {
-    flex: 1,
+    // paddingTop:150
   },
+
   outerCard: {
     alignItems: 'center',
-    // backgroundColor: '#396EB0',
   },
   card: {
-    // backgroundColor: '#FC997C',
     borderWidth: 1,
     borderColor: 'lightgray',
     margin: 10,
-    padding: 10,
+    padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
     width: 110,
@@ -156,6 +160,8 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     margin: 5,
+    borderWidth: 2,
+    borderColor: 'lightgray',
   },
   apiTitle: {
     fontSize: 15,
