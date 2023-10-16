@@ -48,7 +48,7 @@ const ApiCall = () => {
     }
     const timeout = setTimeout(() => {
       setsearchData(text);
-    }, 1000);
+    }, 500);
     setTypingTimeout(timeout);
   };
   useEffect(() => {

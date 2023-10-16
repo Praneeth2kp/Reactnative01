@@ -5,21 +5,23 @@ import ScrollCard from './components/ScrollCard';
 import LinkingCard from './components/LinkingCard';
 import ListCard from './components/ListCard';
 import TextApi from './components/TextApi';
-import GameTic from './components/GameTic';
+import GameTic from './components/GameTicTacToe/GameTic';
 import ApiCall from './components/ApiCall';
 import MyDiceRoll from './components/MyDiceRoll';
+import CurrencyCalculator from './components/CurrencyCalc/CurrencyCalculator';
 const App1 = () => {
   return (
     <SafeAreaView>
-      <ScrollView nestedScrollEnabled={true}>
-        {/* <ScrollCard /> */}
-        {/* <ImageCard /> */}
-        {/* <LinkingCard /> */}
-        {/* <ListCard />   */}
-        {/* <ApiCall /> */}
-        {/* <TextApi /> */}
-        {/* <GameTic /> */}
+      <ScrollView nestedScrollEnabled={false}>
+        <ScrollCard />
+        <ImageCard />
+        <LinkingCard />
+        <ListCard />  
+        <ApiCall />
+        <TextApi />
+        <GameTic />
         <MyDiceRoll />
+        <CurrencyCalculator />
       </ScrollView>
     </SafeAreaView>
   );
