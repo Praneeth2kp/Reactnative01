@@ -83,7 +83,7 @@ export default CurrencyCalculator;
 
 const styles = StyleSheet.create({
   container: {
-    height:760,
+    height:825,
     flex: 1,
     backgroundColor: '#515151',
   },

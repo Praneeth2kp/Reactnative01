@@ -87,7 +87,6 @@ const TextApi = () => {
           This is a simple example of how to use React Native Flatlist with 3rd
           party libraries like axios.
         </Text>
-        <Text>By, Praneeth.K</Text>
       </View>
     </View>
   );

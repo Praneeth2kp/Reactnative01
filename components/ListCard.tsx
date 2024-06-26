@@ -48,7 +48,7 @@ const ListCard = () => {
     },
   ];
   return (
-    <View>
+    <View style={styles.box2}>
       <Text style={styles.title}>Contacts</Text>
       <ScrollView>
         {Contacts.map(({uid, name, phone, imageUrl}) => (
@@ -73,6 +73,9 @@ const ListCard = () => {
   );
 };
 const styles = StyleSheet.create({
+  box2:{
+    marginBottom:30
+  },
   title: {
     fontSize: 23,
     fontWeight: 'bold',

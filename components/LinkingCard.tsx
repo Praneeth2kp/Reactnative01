@@ -32,7 +32,7 @@ const LinkingCard = () => {
               <TouchableOpacity
                 onPress={() =>
                   openWebsite(
-                    'https://reactnative.dev/',
+                    'https://reactnative.dev/docs/linking',
                   )
                 }>
                 <Text style={styles.leftfooter}>Read More</Text>
@@ -40,7 +40,7 @@ const LinkingCard = () => {
               <TouchableOpacity
                 onPress={() =>
                   openWebsite(
-                    'https://github.com/hiteshchoudhary/React-native-projects/tree/main/natigationexplore09',
+                    'https://reactnative.dev',
                   )
                 }>
                 <Text style={styles.rightfooter}>Subscribe</Text>
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
   },
   outcard: {
     height: 470,
-    width: '95%',
-    backgroundColor: 'white',
+    width: '98%',
+    backgroundColor:'white',
     alignItems: 'center',
     borderRadius: 10,
     marginVertical: 10,

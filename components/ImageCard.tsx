@@ -4,13 +4,13 @@ import React from 'react';
 const ImageCard = () => {
   return (
     <View>
-      <View>
+      <View style={[{alignItems:'center'}]}>
         <View>
           <Text style={[{color: 'white'}, {fontSize: 23}]}>ImageCard</Text>
         </View>
         <View style={styles.container2}>
           <ScrollView>
-            <View style={[{alignItems: 'center'}]}>
+            <View style={[{alignItems: 'center'},{justifyContent:"center"}]}>
               <Image
                 source={{
                   uri: 'https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?cs=srgb&dl=daylight-forest-glossy-443446.jpg&fm=jpg',

@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   FlatList,
+  TextInput,
   Image,
   TouchableOpacity,
 } from 'react-native';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 interface User {
   id: number;
@@ -15,112 +15,85 @@ interface User {
   url: string;
 }
 const ApiCall = () => {
-  const [searchData, setsearchData] = useState('');
-  const [filteredResult, setFilteredResult] = useState<User[]>([]);
-  const [searchResult, setsearchResult] = useState<User[]>([]);
-  const [dataLoaded, setDataLoaded] = useState(false);
-  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
-    null,
-  );
-
-  const Search = async () => {
+  const [searchData, setSearchData] = useState('');
+  const [searchResult, setSearchResult] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const SearchApi = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(
         searchData
           ? `https://jsonplaceholder.typicode.com/photos?q=${searchData}`
-          : 'https://jsonplaceholder.typicode.com/photos?_limit=20&offset=4',
+          : 'https://jsonplaceholder.typicode.com/photos?_limit=21&offset=4',
       );
-      setsearchResult(response.data);
-      setDataLoaded(true);
+      if (response) {
+        setSearchResult(response.data);
+      }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-  };
-  const filterData = () => {
-    const filteredData = searchResult.filter(data =>
-      data.title.toLowerCase().includes(searchData.toLowerCase()),
-    );
-    setFilteredResult(filteredData);
-  };
-  const handleSearch = (text: string) => {
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-    const timeout = setTimeout(() => {
-      setsearchData(text);
-    }, 500);
-    setTypingTimeout(timeout);
   };
   useEffect(() => {
-    Search();
+    SearchApi();
   }, [searchData]);
-  useEffect(() => {
-    filterData();
-  }, [searchData, searchResult]);
-
   return (
     <View>
-      <View style={styles.header}>
-        <View style={styles.titleheader}>
-          <Text style={styles.title}>Search Application</Text>
-        </View>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Type for Search..."
-            onChangeText={handleSearch}
-          />
-        </View>
+      <View style={styles.titleheader}>
+        <Text style={styles.title}>ApiCall</Text>
       </View>
-      <View style={styles.body}>
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter Username"
+          value={searchData}
+          onChangeText={(text: React.SetStateAction<string>) =>
+            setSearchData(text)
+          }
+        />
+      </View>
+
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>Loading ..... </Text>
+        </View>
+      ) : (
         <View style={[styles.outerCard]}>
           <FlatList
             numColumns={3}
-            nestedScrollEnabled={false}
-            data={filteredResult}
+            nestedScrollEnabled={true}
+            data={searchResult}
             keyExtractor={({id}) => id.toString()}
             renderItem={({item}) => (
               <View style={styles.card}>
                 <Text style={styles.titleText}>ID: {item.id}</Text>
-                <TouchableOpacity>
-                  <Image source={{uri: item.url}} style={styles.apiImage} />
-                </TouchableOpacity>
                 <Text numberOfLines={2} style={styles.apiTitle}>
                   {item.title}
                 </Text>
+                <TouchableOpacity>
+                  <Image source={{uri: item.url}} style={styles.apiImage} />
+                </TouchableOpacity>
               </View>
             )}
           />
         </View>
-      </View>
-      <View>
-        {dataLoaded ? (
-          <View style={styles.footerCard1}></View>
-        ) : (
-          <View style={styles.footerCard}></View>
-        )}
-      </View>
+      )}
     </View>
   );
 };
 
+export default ApiCall;
+
 const styles = StyleSheet.create({
-  header: {
-    paddingVertical: 15,
-    alignItems: 'center',
-    backgroundColor: '#2E4C6D',
-    // position: 'absolute',
-    // left: 0,
-    // right: 0,
-    // top: 0,
-  },
   titleheader: {
     alignItems: 'center',
+    backgroundColor: '#ff9800',
   },
   title: {
     fontSize: 30,
     fontWeight: '400',
-    color: '#DADDFC',
+    color: '#FFFFFF',
   },
   searchContainer: {
     width: '100%',
@@ -136,10 +109,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 20,
   },
-  body: {
-    // paddingTop:150
+  loadingContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'black',
   },
-
+  loadingText: {
+    fontSize: 20,
+    color: 'white',
+  },
   outerCard: {
     alignItems: 'center',
   },
@@ -175,4 +153,3 @@ const styles = StyleSheet.create({
     padding: 40,
   },
 });
-export default ApiCall;
